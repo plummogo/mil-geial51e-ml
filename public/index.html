@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="game.js"></script>
+    <title>Integrált szoftverrendszerek és tesztelésük - Beadandó</title>
+</head>
+<body>
+    <div id="loading">
+        <h1>😻CATPONG😻</h1>
+        <p id="message">😿Waiting for another player...😿</p>
+        <div class="loading-container">
+            <div class="control-container">
+                <h3>1<sup>st</sup> player controls</h3>
+                <div class="control">
+                    <p>UP</p> 
+                    <p>DOWN</p>
+                </div>
+                <div class="control">
+                    <img class="control-image" src="assets/w.png">
+                    <img class="control-image" src="assets/s.png">
+                </div>
+            </div>
+            <img id="img" src="assets/loading.gif">
+            <div class="control-container">
+                <h3>2<sup>nd</sup> player controls</h3>
+                <div class="control">
+                    <p>UP</p> 
+                    <p>DOWN</p>
+                </div>
+                <div class="control">
+                    <img class="control-image" src="assets/up.png">
+                    <img class="control-image" src="assets/down.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="canvas" width="800" height="400" style="display: none"></canvas>
+</body>
+</html>

@@ -1,0 +1,62 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    word-spacing: 10px;
+    color: white;
+    background-image: url('../assets/bg.png');
+}
+
+#canvas {
+    border: 4px solid white; 
+    display: block;
+    margin: auto;
+}
+
+#loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+#message {
+    font-size: 32px;
+    animation: blink-animation 1s steps(5, start) infinite; /* Blinking effect */
+    z-index: 2;
+}
+
+#img {
+    width: 48%;
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.control-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 120px;
+}
+
+.control-image {
+    height: 50px;
+    width: 50px;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
