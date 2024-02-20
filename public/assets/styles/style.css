@@ -3,7 +3,7 @@ body {
     margin: 0;
     word-spacing: 10px;
     color: white;
-    background-image: url('../assets/bg.png');
+    background-image: url('../img/bg.png');
 }
 
 #canvas {

@@ -20,6 +20,18 @@ A játékos a játékban lévő ütőt úgy irányítja, hogy függőlegesen moz
 └── 📁node_modules
 ...
 └── 📁public
+        └── 📁assets
+            └── 📁img
+                └── ball.png
+                └── bg.png
+                └── down.png
+                └── favicon.png
+                └── loading.gif
+                └── s.png
+                └── up.png
+                └── w.png
+            └── 📁styles
+                └── style.css
         └── game.js
         └── index.html
 └── .gitignore
@@ -91,10 +103,21 @@ wss.on('connection', (ws) => {
 });
 ```
 
+### UI tervezés
+
+Kettéválasztottam az ``` index.html``` file-ban a megjelenítendő ```div```-eket. A loading dobozba, a második játékosig várakozó képernyőt raktam bele, míg a ```canvas```-nak addig egy ```display=none``` inline style-t adtam át. Ezt majd a ```game.js```-be fogom kezelni.
+
+#### Loading screen
+```flex```-et használtam az egymást követő cím, üzenet, első/második játékos irányítása és loading gif formázásához.[^7] 
+A cuki cica loading gif-et internetről szedtem le, míg az irányító gombokat én terveztem meg. Lényegében ami kiemelendő a villogó üzenet megvalósítása, ```@keyframes```-el.[^8]
+
+#### Canvas screen
+Ezt a ```game.js```-be fogom módosítani: az ütők, labda, pálya illetve a mozgás stílusát. 
+
 ## Kiegészítések
 Markdown-hoz szükséges bővítményeket telepítettem. 
-- Draw Folder Structure: Egy olyan kiegészítő bővítmény VS Code-hoz, ami lehetővé teszi Markdown file-ba a file struktúra felépítést.[^7]
-- Markdown Footnotes: Egy olyan kiegészítő bővítmény VS Code-hoz, ami lehetővé teszi a lábjegyzetek írását.[^8]
+- Draw Folder Structure: Egy olyan kiegészítő bővítmény VS Code-hoz, ami lehetővé teszi Markdown file-ba a file struktúra felépítést.[^9]
+- Markdown Footnotes: Egy olyan kiegészítő bővítmény VS Code-hoz, ami lehetővé teszi a lábjegyzetek írását.[^10]
 
 [^1]: https://hu.wikipedia.org/wiki/Pong.
 [^2]: https://nodejs.org/en
@@ -102,5 +125,7 @@ Markdown-hoz szükséges bővítményeket telepítettem.
 [^4]: https://www.npmjs.com/package/express
 [^5]: https://www.npmjs.com/package/ws
 [^6]: https://git-scm.com/docs/gitignore
-[^7]: https://marketplace.visualstudio.com/items?itemName=jmkrivocapich.drawfolderstructure
-[^8]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-footnotes
+[^7]: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+[^8]: https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+[^9]: https://marketplace.visualstudio.com/items?itemName=jmkrivocapich.drawfolderstructure
+[^10]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-footnotes
