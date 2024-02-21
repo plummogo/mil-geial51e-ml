@@ -1,22 +1,9 @@
-name: Node.js Catpong
-
-on:
-  push:
-    branches: [ "game" ]
-  pull_request:
-    branches: [ "game" ]
+on: push
 
 jobs:
-  build:
-
-    runs-on: self-hosted
-
+  build-node:
+    runs-on: ubuntu-latest
+    container: node:14
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16.x
     - run: npm install
-    - run: npm test
-    - run: pm2 restart app-name
+    - run: npm --version
