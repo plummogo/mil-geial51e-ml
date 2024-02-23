@@ -23,14 +23,36 @@ body {
     width: 100%;
 }
 
-#message {
+#count-down {
+    display: block;
+    margin: auto;
+    width: 40%;
+}
+
+#message, #winner {
     font-size: 32px;
     animation: blink-animation 1s steps(5, start) infinite; /* Blinking effect */
     z-index: 2;
+    margin: 0;
 }
 
 #img {
     width: 48%;
+}
+
+#winner {
+    display: none;
+}
+
+#info {
+    font-size: 32px;
+    text-align: 32px;
+    display: none;
+    margin: 0;
+}
+
+.countdown-message {
+    text-align: center;
 }
 
 .loading-container {

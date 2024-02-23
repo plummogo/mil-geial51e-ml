@@ -2,6 +2,7 @@ import express from 'express';
 import { WebSocketServer } from 'ws';
 import { createServer } from 'http';
 import { CONFIGURATION, MESSAGE_TYPES, GAME_SETTINGS } from './public/constants.js'
+import { calculatePaddle, update, sendMessage } from './public/service.js';
 
 //Express alkalmazás létrehozása
 const app = express();
@@ -15,51 +16,32 @@ const wss = new WebSocketServer({ server });
 //Statikus middleware megadása (game.js, index.html elérési helye)
 app.use(express.static('public'));
 
-//Játékosokat tároló vektor
-let players = [];
-let score = [0, 0];
-let ball = {
-  speed: { x: 2, y: 2 },
-  coord: { x: 0, y: 0 }
-};
-let paddle = [0, 0];
-
 //Eseménykezelő akkor hívódik meg, amikor egy új kliens kapcsolódik a WebSocket szerverhez.
-wss.on('connection', function connection(ws) {
-  if (players.length < 2) {
+wss.on('connection', ws => {
+  if (GAME_SETTINGS.PROFILE.PLAYERS.length < 2) {
     //Eltárolom a 'players' vektorba az éppen csatlakozott játékost
-    players.push(ws);
+    GAME_SETTINGS.PROFILE.PLAYERS.push(ws);
     //Naplózom konzolon
-    console.log(`Player ${players.length} has joined the game.`);
+    console.log(`Player ${GAME_SETTINGS.PROFILE.PLAYERS.length} has joined the game.`);
+  } 
+  
+  if(GAME_SETTINGS.PROFILE.PLAYERS.length == 2 ) {
     //Mindkettő játkos csatlakozása során elküldöm a 'start' üzenetet a 'game.js'-nek
-    players.length === 2 && broadcastMessage({ type:MESSAGE_TYPES.START, data: null });
+    sendMessage({ type:MESSAGE_TYPES.START });
+    setInterval(update, GAME_SETTINGS.PROFILE.INTERVAL);
   }
 
   //Eseménykezelő akkor hívodik meg, amikor üzenetet küldenek neki
-  ws.on('message', event => {    
-    const parsedMessage = JSON.parse(event);
-    switch (parsedMessage.type) {
-      case MESSAGE_TYPES.SCORE:
-        const arraysEqual = score.length === parsedMessage.score.length && score.every((val, index) => val === parsedMessage.score[index]);
-        if (!arraysEqual) {
-          score = [...parsedMessage.score];
-          broadcastMessage({type: MESSAGE_TYPES.SCORE, data: score });
-        }
-        break;
-      case MESSAGE_TYPES.BALL_MOVE:
-        const objectsEqual = JSON.stringify(ball) === JSON.stringify(parsedMessage.data);
-        if (!objectsEqual) {
-          ball = parsedMessage.ball;
-          broadcastMessage({ type: MESSAGE_TYPES.BALL_MOVE, data: ball })
-        }
-        break;
+  ws.on('message', event => {  
+    const message = JSON.parse(event);
+    switch (message.type) {
       case MESSAGE_TYPES.PADDLE_MOVE:
-        const arraysEqual1 = paddle.length === parsedMessage.paddle.length && paddle.every((val, index) => val === parsedMessage.paddle[index]);
-          if (!arraysEqual1) {
-            paddle = parsedMessage.paddle;
-            broadcastMessage({ type: MESSAGE_TYPES.PADDLE_MOVE, data: paddle })
-          }
-          break;
+        const playerIndex = GAME_SETTINGS.PROFILE.PLAYERS.findIndex(player => player === ws);
+        calculatePaddle(playerIndex, message.paddle);
+        break;
+      case MESSAGE_TYPES.WIN:
+        ws.close(1000, 'Closing by client request'); // Close the connection
+        break;
     }
   });
 
@@ -67,16 +49,11 @@ wss.on('connection', function connection(ws) {
     //Naplózom hogy elhagyta egy játékos a játékot
     console.log('Player left the game.');
     //Eltávolítom a 'players' vektorból a kilépett játékost
-    players = players.filter(player => player !== ws);
+    GAME_SETTINGS.PROFILE.PLAYERS = GAME_SETTINGS.PROFILE.PLAYERS.filter(player => player !== ws);
     //Elküldöm a 'reset' üzenetet a 'game.js'-nek 
-    broadcastMessage({type: MESSAGE_TYPES.RESET, data: null});
+    sendMessage({type: MESSAGE_TYPES.RESET});
   });
 });
-
-//üzenetet küdlő segéd metódus (pl.: 'start', 'reset')
-function broadcastMessage(message) {
-  players.forEach(player => player.send(JSON.stringify(message)));
-}
 
 //Beállítom a 3000-res portot, nem használok React-et a saját gépemen, így nem lesz probléma
 //Terminál konzolára kiíratom a sikeres kapcsólódást
