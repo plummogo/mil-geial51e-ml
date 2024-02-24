@@ -1,85 +1,142 @@
+/* 'BODY'-n belül globális formázások */
 body {
+    /* A 'body'-n belül használt betűtípusok */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* A 'body' margóját 0px-re állítom, hogy teljes legyen a képernyő  */
     margin: 0;
+    /* A szövegekben a karakterek között 10px távolság lesz  */
     word-spacing: 10px;
+    /* A szövegek fehér színűek lesznek  */
     color: white;
+    /* A 'body' hátterének hekkelése, mivel a cuki cica gif nem transzparens, egy kicsit gagyi megoldás, de remélhetőleg nem annyira feltűnő  */
     background-image: url('../img/bg.png');
 }
 
+/* Játék stílusának alapformázása */
 #canvas {
+    /* Beállítom a 'canvas' határvonalát 4px-es fehér csíkkal */
     border: 4px solid white; 
+    /* 'block'-ként jelenítem meg */
     display: block;
+    /* Azért használok absolute értéket, hogy középre helyezzem a 'div'-be */
     position: absolute;
+    /* Beállítom hogy átmenjen rajta a szöveg ha szükséges, és ne takarja ki */
     z-index: 2;
+    /* Beállítom hogy átmenjen felülről 250px-re legyen */
     top: 250px;
+    /* Középre igazítom  */
     margin: auto;
 }
 
+/* Fő tároló block formázása */
 #loading {
+    /* Flex konténer beállítása */
     display: flex;
+    /* Flex konténer oszloponként fogja érzékelni a beágyazott elemeket */
     flex-direction: column;
+    /* Középre igazítom az elemeket */
     align-items: center;
+    /* Teljes magasságot adok, ha %-ban adom meg úgy nem jó, így a teljes 'viewheight'-ot adom át */
     height: 100vh;
+    /* Teljes szélességet adok */
     width: 100%;
 }
 
+/* A visszaszámláló gif formázása */
 #count-down {
+    /* 'block'-ként jelenítem meg */
     display: block;
+    /* Középre igazítom */
     margin: auto;
+    /* Szélességét 40%-ra állítom be */
     width: 40%;
 }
 
+/* Üzenetek formázása 
+   message amíg nem csatlakozik játékos
+   winner amikor nyert a játékos
+*/
 #message, #winner {
+    /* Betűméret beállítása */
     font-size: 32px;
-    animation: blink-animation 1s steps(5, start) infinite; /* Blinking effect */
+    /* Eltűnő-újrarajzolodó animáció beállítása */
+    animation: blink-animation 1s steps(5, start) infinite; 
+    /* Beállítom hogy átmenjen rajta a szöveg ha szükséges, és ne takarja ki */
     z-index: 2;
+    /* Beállítom a margót 0px-re */
     margin: 0;
 }
 
+/* A cuki cica gif formázása */
 #img {
+    /* Szélességet állítok */
     width: 48%;
 }
 
+/* A nyertes üzenet elrejtése */
 #winner {
     display: none;
 }
 
+/* Az információ üzenet formázása */
 #info {
+    /* Betűméret beállítása */
     font-size: 32px;
+    /* Középre igazítom */
     text-align: 32px;
+    /* Elrejtem */
     display: none;
+    /* Beállítom a margót 0px-re */
     margin: 0;
 }
 
+/* Visszaszámláló üzenetek (Ready...Set...Go!) formázása */
 .countdown-message {
+    /* Beállítom középre */
     text-align: center;
 }
 
+/* A főképernyő kontérének formázása */
 .loading-container {
+    /* Flex elem beállítása */
     display: flex;
+    /* Beállítom középre a szövegigazítást */
     align-items: center;
+    /* Kitöltöm a flex szélességet */
     justify-content: space-around;
+    /* Kitöltöm a szélességet */
     width: 100%;
 }
 
+/* Billentyű kombináció konténer formázása */
 .control-container {
+    /* Flex elemeket beállítom */
     display: flex;
+    /* Flex irányt oszloppá alakítom */
     flex-direction: column;
+    /* Szövegirányt középre állítom */
     align-items: center;
 }
 
+/* Billentyű kombinációt tartalmazó formázás */
 .control {
+    /* Flex elemeket beállítom */
     display: flex;
+    /* Elemek közötti távolságot állítok */
     gap: 20px;
+    /* Beállítom középre egymáshoz viszonyítva */
     justify-content: center;
+    /* Fix szélességet adok neki */
     width: 120px;
 }
 
+/* Billentyű kombinációt tartalmazó kép szélességnek és magasságának formázása */
 .control-image {
     height: 50px;
     width: 50px;
 }
 
+/* keyframes segítségével érem el az eltűnő-megjelenítő animációt */
 @keyframes blink-animation {
     to {
         visibility: hidden;

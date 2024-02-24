@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Beállítom a tabon az ikont -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+    <!-- Importálom a saját css-t -->
     <link rel="stylesheet" href="assets/styles/style.css">
+    <!-- Importálom a jQuery libet, (fadeIn, fadeOut) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Importálom a constants.js modult -->
     <script type="module" src="constants.js"></script>
+    <!-- Importálom a service.js modult -->
     <script type="module" src="service.js"></script>
+    <!-- Importálom a client.js modult -->
     <script type="module" src="client.js"></script>
+    <!-- Tabon címet adok -->
     <title>Integrált szoftverrendszerek és tesztelésük - Beadandó</title>
 </head>
 <body>
+    <!-- Játék fő komponenseit tartalmazó blokk -->
     <div id="loading">
+        <!-- Játék címe -->
         <h1>😻CATPONG😻</h1>
+        <!-- Játék üzenete, míg várunk a második játékosra -->
         <p id="message">😿Waiting for another player...😿</p>
+        <!-- Játék üzenete, ha nyert valamelyik játékos -->
         <p id="winner" style="display: none;"></p>
+        <!-- Játék üzenete, ha elkezdődött a játék -->
         <p id="info" style="display: none;">The winner who scores 10 point</p>
+        <!-- Játék fő komponens konténere -->
         <div class="loading-container">
+            <!-- Játékos billentyű kiosztása -->
             <div class="control-container">
                 <h2>Player 1</h2>
                 <h3>Controls</h3>
@@ -32,31 +46,37 @@
                     <img class="control-image" src="assets/img/down.png">
                 </div>
             </div>
+            <!-- Cuki cica a 'canvas' közepés -->
             <img id="img" src="assets/img/loading.gif">
             <div>
-
-                <div class="control-container">
-                    <h2>Player 2</h2>
-                    <div class="control">
-                        <p>UP</p>
-                        <p>DOWN</p>
-                    </div>
-                    <div class="control">
-                        <img class="control-image" src="assets/img/w.png">
-                        <img class="control-image" src="assets/img/s.png">
-                    </div>
-                    <div class="control">
-                        <img class="control-image" src="assets/img/up.png">
-                        <img class="control-image" src="assets/img/down.png">
-                    </div>
+            <!-- Játékos billentyű kiosztása -->
+            <div class="control-container">
+                <h2>Player 2</h2>
+                <div class="control">
+                    <p>UP</p>
+                    <p>DOWN</p>
+                </div>
+                <div class="control">
+                    <img class="control-image" src="assets/img/w.png">
+                    <img class="control-image" src="assets/img/s.png">
+                </div>
+                <div class="control">
+                    <img class="control-image" src="assets/img/up.png">
+                    <img class="control-image" src="assets/img/down.png">
                 </div>
             </div>
-            <canvas id="canvas" width="800" height="400"></canvas>
+        </div>
+        <!-- Játék legfontosabb része, ahol rajzolom a játékmenetet -->
+        <canvas id="canvas" width="800" height="400"></canvas>
         </div>
     </div>
+    <!-- Ready üzenet ha elindult a játék -->
     <h1 id="ready" class="countdown-message" style="display: none;">Ready</h1>
+    <!-- Set üzenet ha elindult a játék -->
     <h1 id="set" class="countdown-message" style="display: none;">Set</h1>
+    <!-- Go! üzenet ha elindult a játék -->
     <h1 id="go" class="countdown-message" style="display: none;">Go!</h1>
+    <!-- Visszaszámláló transzparens gif ha elindult a játék, netről szedtem -->
     <img id="count-down" src="assets/img/countdown.gif" style="display: none;">
 </body>
 </html>
