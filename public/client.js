@@ -5,7 +5,7 @@
 import { GAME_SETTINGS, MESSAGE_TYPES } from './constants.js';
 
 // Új WebSocket kapcsolatot regisztrálok és használok kliens oldalon, ezzel összekötöm a klienst a WebSocket szerverrel
-const ws = new WebSocket('ws://192.168.1.163:3000');
+const ws = new WebSocket('ws://https://catpong-liard.vercel.app/api/websocket');
 
 // Javascript eseménykezelője, akkor fut le, amikor a dokumentum teljes DOM szerkezete betöltődött
 // Azért fontos, mert a canvas-t így tudom biztonságosan használni 
