@@ -5,7 +5,7 @@
 import { GAME_SETTINGS, MESSAGE_TYPES } from './constants.js';
 
 // Új WebSocket kapcsolatot regisztrálok és használok kliens oldalon, ezzel összekötöm a klienst a WebSocket szerverrel
-const ws = new WebSocket('wss://catpong-git-vercel-plummogos-projects.vercel.app');
+const ws = new WebSocket('wss://catpong-git-vercel-plummogos-projects.vercel.app/api/websocket');
 
 // Javascript eseménykezelője, akkor fut le, amikor a dokumentum teljes DOM szerkezete betöltődött
 // Azért fontos, mert a canvas-t így tudom biztonságosan használni 
