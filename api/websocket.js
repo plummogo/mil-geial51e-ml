@@ -23,16 +23,6 @@ app.use(express.static('public'));
 // Inicializálom a játékban használt konstansokat
 initGame();
 
-server.on('upgrade', function (request, socket, head) {
-  if (request.url === '/api/websocket/ws') {
-      wss.handleUpgrade(request, socket, head, function (ws) {
-          wss.emit('connection', ws, request);
-      });
-  } else {
-      socket.destroy();
-  }
-});
-
 // Websocket eseménykezelője, akkor hívódik meg, amikor egy új kliens kapcsolódik a WebSocket szerverhez.
 wss.on('connection', ws => {
   // Megvizsgálom hogy a csatlakozott játékosok száma nem érte el a maximális és elvárt 2 játékos számot
@@ -86,3 +76,5 @@ wss.on('connection', ws => {
     initGame();
   });
 });
+
+server.listen(CONFIGURATION.PORT, CONFIGURATION.API_BASE_URL, () => console.log('Listening on %d', server.address().port))
