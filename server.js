@@ -76,7 +76,3 @@ wss.on('connection', ws => {
     initGame();
   });
 });
-
-// Beállítom a 3000-res portot, nem használok React-et a saját gépemen, így nem lesz probléma
-// Terminál konzolára kiíratom a sikeres kapcsólódást
-server.listen(CONFIGURATION.PORT, CONFIGURATION.API_BASE_URL, () => console.log('Listening on %d', server.address().port))
